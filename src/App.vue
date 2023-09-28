@@ -1,20 +1,17 @@
 <script setup lang="ts">
-import axios from 'axios'
+import { useAppStore } from './store/modules/app'
 
-axios('/api/hello_world').then(({ data }) => {
-  console.log(data)
-})
+const appStore = useAppStore()
 </script>
 
 <template>
-  <SvgIcon icon-class="brand" color="red" size="20px" />
-  <div class="testBg"></div>
+  <el-config-provider
+    :locale="appStore.locale"
+    :size="appStore.size"
+  >
+    <router-view />
+  </el-config-provider>
 </template>
 
 <style scoped>
-.testBg {
-  width: 100px;
-  height: 100px;
-  background-color: var(--menuBg);
-}
 </style>
