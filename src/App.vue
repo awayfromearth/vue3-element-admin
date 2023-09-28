@@ -2,7 +2,7 @@
 import axios from 'axios'
 
 axios('/api/hello_world').then(({ data }) => {
-  console.log(data);
+  console.log(data)
 })
 </script>
 

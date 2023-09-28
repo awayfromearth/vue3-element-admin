@@ -19,12 +19,12 @@ export default defineConfig(({ mode }) => {
         symbolId: 'icon-[dir]-[name]'
       }),
       viteMockServe({
-        localEnabled: mode === "development"
+        localEnabled: mode === 'development'
       })
     ],
     resolve: {
       alias: {
-        "@": path.resolve("./src")
+        '@': path.resolve('./src')
       }
     },
     css: {
