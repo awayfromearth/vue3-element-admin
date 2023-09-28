@@ -43,15 +43,15 @@ interface DefaultSettings {
 }
 
 const defaultSettings: DefaultSettings = {
-  title: "vue3-element-admin",
+  title: 'vue3-element-admin',
   showSettings: true,
   tagsView: true,
   fixedHeader: false,
   sidebarLogo: true,
-  layout: "left",
-  theme: "light",
-  size: "default",
-  language: "zh-cn"
+  layout: 'left',
+  theme: 'light',
+  size: 'default',
+  language: 'zh-cn'
 }
 
 export default defaultSettings

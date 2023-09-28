@@ -1,6 +1,6 @@
 /**
  * 登录用户信息
-*/
+ */
 export interface UserInfo {
   userId?: number
   username?: string

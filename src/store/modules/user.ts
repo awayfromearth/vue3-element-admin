@@ -1,9 +1,9 @@
 import axios from 'axios'
-import { defineStore } from "pinia"
+import { defineStore } from 'pinia'
 import { useStorage } from '@vueuse/core'
-import { resetRouter } from "@/router"
+import { resetRouter } from '@/router'
 import { store } from '@/store'
-import type { UserInfo } from "@/api/user/types"
+import type { UserInfo } from '@/api/user/types'
 
 export const useUserStore = defineStore('user', () => {
   const token = useStorage('accessToken', '')
@@ -13,13 +13,15 @@ export const useUserStore = defineStore('user', () => {
       axios({
         url: '/api/v1/auth/login',
         method: 'post'
-      }).then(({ data: { data } }) => {
-        const { tokenType, accessToken } = data
-        token.value = tokenType + ' ' + accessToken
-        resolve()
-      }).catch(e => {
-        reject(e)
       })
+        .then(({ data: { data } }) => {
+          const { tokenType, accessToken } = data
+          token.value = tokenType + ' ' + accessToken
+          resolve()
+        })
+        .catch(e => {
+          reject(e)
+        })
     })
   }
 
@@ -33,20 +35,22 @@ export const useUserStore = defineStore('user', () => {
       axios({
         url: '/api/v1/users/me',
         method: 'get'
-      }).then(({ data: { data } }) => {
-        if (!data) {
-          reject('Verification failed, please Login again.')
-          return
-        }
-        if (!data.roles || data.roles.length <= 0) {
-          reject('getUserInfo: roles must be a non-null array!')
-          return
-        }
-        Object.assign(user, { ...data })
-        resolve(data)
-      }).catch(e => {
-        reject(e)
       })
+        .then(({ data: { data } }) => {
+          if (!data) {
+            reject('Verification failed, please Login again.')
+            return
+          }
+          if (!data.roles || data.roles.length <= 0) {
+            reject('getUserInfo: roles must be a non-null array!')
+            return
+          }
+          Object.assign(user, { ...data })
+          resolve(data)
+        })
+        .catch(e => {
+          reject(e)
+        })
     })
   }
 

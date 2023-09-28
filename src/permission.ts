@@ -12,17 +12,17 @@ router.beforeEach(async (to, from, next) => {
   NProgress.start()
 
   const hasToken = localStorage.getItem('accessToken')
-  
+
   if (hasToken) {
     if (to.path === '/login') {
-      next({ path: '/'})
+      next({ path: '/' })
       NProgress.done()
     } else {
       const userStore = useUserStoreHook()
       const hasRoles = userStore.user.roles && userStore.user.roles.length > 0
       if (hasRoles) {
         if (to.matched.length === 0) {
-          from.name ? next({ name: from.name }): next('/404')
+          from.name ? next({ name: from.name }) : next('/404')
         } else {
           next()
         }
@@ -31,12 +31,12 @@ router.beforeEach(async (to, from, next) => {
           const { roles } = await userStore.getInfo()
           const permissionStore = usePermissionStoreHook()
           const accessRoute = await permissionStore.generateRoutes(roles)
-          
+
           accessRoute.forEach(route => {
             router.addRoute(route)
           })
           next({ ...to, replace: true })
-        } catch(e) {
+        } catch (e) {
           userStore.resetStore()
           next(`/login?redirect=${to.path}`)
           NProgress.done()
@@ -47,8 +47,8 @@ router.beforeEach(async (to, from, next) => {
     if (whiteList.indexOf(to.path) !== -1) {
       next()
     } else {
-      console.log(2);
-      
+      console.log(2)
+
       next(`/login?redirect=${to.path}`)
       NProgress.done()
     }

@@ -1,9 +1,9 @@
-import axios from "axios"
-import { defineStore } from "pinia"
-import { constantRoutes } from "@/router"
-import { store } from ".."
+import axios from 'axios'
+import { defineStore } from 'pinia'
+import { constantRoutes } from '@/router'
+import { store } from '..'
 import { ref } from 'vue'
-import type { RouteRecordRaw } from "vue-router"
+import type { RouteRecordRaw } from 'vue-router'
 
 const modules = import.meta.glob('../../views/**/**.vue')
 
@@ -86,13 +86,15 @@ export const usePermissionStore = defineStore('permission', () => {
       axios({
         url: '/api/v1/menus/routes',
         method: 'get'
-      }).then(({ data: { data: asyncRoutes } }) => {
-        const accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
-        setRoutes(accessedRoutes)
-        resolve(accessedRoutes)
-      }).catch(e => {
-        reject(e)
       })
+        .then(({ data: { data: asyncRoutes } }) => {
+          const accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
+          setRoutes(accessedRoutes)
+          resolve(accessedRoutes)
+        })
+        .catch(e => {
+          reject(e)
+        })
     })
   }
 

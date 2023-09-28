@@ -27,7 +27,9 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       viteMockServe({
         localEnabled: mode === 'development'
       }),
-      UnoCSS({ /* options */ }),
+      UnoCSS({
+        /* options */
+      }),
       AutoImport({
         resolvers: [ElementPlusResolver()]
       }),

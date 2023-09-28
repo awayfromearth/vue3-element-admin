@@ -1,13 +1,7 @@
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <div>
-    401
-  </div>
+  <div>401</div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
