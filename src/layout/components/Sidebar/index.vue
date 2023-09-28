@@ -4,10 +4,8 @@ import Logo from './Logo.vue'
 
 <template>
   <div>
-    <Logo :collapse="false"/>
+    <Logo :collapse="false" />
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
