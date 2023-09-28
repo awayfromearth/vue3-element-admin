@@ -1,11 +1,13 @@
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { viteMockServe } from 'vite-plugin-mock'
+import type { ConfigEnv, UserConfig } from 'vite'
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
+  const env = loadEnv(mode, process.cwd())
   return {
     define: {
       __VUE_I18N_FULL_INSTALL__: true,
@@ -32,6 +34,22 @@ export default defineConfig(({ mode }) => {
         scss: {
           javascriptEnabled: true,
           additionalData: '@import "./src/styles/variable.scss";'
+        }
+      }
+    },
+    server: {
+      host: 'localhost',
+      port: Number(env.VITE_APP_PORT),
+      open: true,
+      proxy: {
+        [env.VITE_APP_BASE_API]: {
+          target: env.VITE_APP_TARGET_URL,
+          changeOrigin: true,
+          rewrite: path =>
+            path.replace(
+              new RegExp("^" + env.VITE_APP_BASE_API),
+              env.VITE_APP_TARGET_BASE_URL
+            )
         }
       }
     }
