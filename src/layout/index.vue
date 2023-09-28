@@ -1,9 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Sidebar from './components/Sidebar/index.vue'
+</script>
 
 <template>
   <div>
-    Layout
-    <router-view />
+    <Sidebar />
   </div>
 </template>
 
